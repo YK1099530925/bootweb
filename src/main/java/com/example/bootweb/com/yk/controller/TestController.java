@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@RequestMapping("/test")
+@RequestMapping("/page")
 @Controller
 public class TestController {
     @Autowired
@@ -23,6 +23,10 @@ public class TestController {
     @RequestMapping("/page")
     public String pageTest(){
         return "/page/page-test.html";
+    }
+    @RequestMapping("/one")
+    public String pageTest1(){
+        return "/page/page-one.html";
     }
 
     /**
