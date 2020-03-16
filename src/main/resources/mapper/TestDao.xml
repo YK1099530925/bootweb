@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    出现的问题：namespace忘了添加，如果不添加，是无法映射成功的，添加了后，mybatis才会映射成功
+    还有忘了添加com.example.bootweb，导致对应不到实体
+-->
+<mapper namespace="com.example.bootweb.com.yk.dao.TestDao">
+    <select id="getJsonResult" resultType="com.example.bootweb.com.yk.entity.TestEntity">
+        select * from test_demo
+    </select>
+</mapper>

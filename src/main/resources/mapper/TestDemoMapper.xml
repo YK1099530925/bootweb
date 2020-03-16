@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bootweb.com.yk.dao.TestDemoMapper">
+  <resultMap id="BaseResultMap" type="com.example.bootweb.com.yk.entity.TestDemo">
+    <id column="demo_id" jdbcType="INTEGER" property="demoId" />
+    <result column="demo_name" jdbcType="VARCHAR" property="demoName" />
+    <result column="demo_desc" jdbcType="VARCHAR" property="demoDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    demo_id, demo_name, demo_desc
+  </sql>
+  <select id="selectByExample" parameterType="com.example.bootweb.com.yk.entity.TestDemoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_demo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from test_demo
+    where demo_id = #{demoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test_demo
+    where demo_id = #{demoId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.bootweb.com.yk.entity.TestDemoExample">
+    delete from test_demo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.bootweb.com.yk.entity.TestDemo">
+    insert into test_demo (demo_id, demo_name, demo_desc
+      )
+    values (#{demoId,jdbcType=INTEGER}, #{demoName,jdbcType=VARCHAR}, #{demoDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bootweb.com.yk.entity.TestDemo">
+    insert into test_demo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="demoId != null">
+        demo_id,
+      </if>
+      <if test="demoName != null">
+        demo_name,
+      </if>
+      <if test="demoDesc != null">
+        demo_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="demoId != null">
+        #{demoId,jdbcType=INTEGER},
+      </if>
+      <if test="demoName != null">
+        #{demoName,jdbcType=VARCHAR},
+      </if>
+      <if test="demoDesc != null">
+        #{demoDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.bootweb.com.yk.entity.TestDemoExample" resultType="java.lang.Long">
+    select count(*) from test_demo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update test_demo
+    <set>
+      <if test="record.demoId != null">
+        demo_id = #{record.demoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.demoName != null">
+        demo_name = #{record.demoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.demoDesc != null">
+        demo_desc = #{record.demoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update test_demo
+    set demo_id = #{record.demoId,jdbcType=INTEGER},
+      demo_name = #{record.demoName,jdbcType=VARCHAR},
+      demo_desc = #{record.demoDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bootweb.com.yk.entity.TestDemo">
+    update test_demo
+    <set>
+      <if test="demoName != null">
+        demo_name = #{demoName,jdbcType=VARCHAR},
+      </if>
+      <if test="demoDesc != null">
+        demo_desc = #{demoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where demo_id = #{demoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bootweb.com.yk.entity.TestDemo">
+    update test_demo
+    set demo_name = #{demoName,jdbcType=VARCHAR},
+      demo_desc = #{demoDesc,jdbcType=VARCHAR}
+    where demo_id = #{demoId,jdbcType=INTEGER}
+  </update>
+</mapper>
