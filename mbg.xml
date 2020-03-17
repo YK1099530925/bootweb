@@ -48,7 +48,9 @@
     </javaClientGenerator>
 	
 	<!--table指定每个表的生成策略 -->
-	<table tableName="test_demo" domainObjectName="TestDemo"></table>
+<!--	<table tableName="article" domainObjectName="Article"></table>-->
+      <!--<table tableName="comment_record" domainObjectName="CommentRecord"></table>-->
+      <table tableName="author" domainObjectName="Author"></table>
 	
   </context>
 </generatorConfiguration>
