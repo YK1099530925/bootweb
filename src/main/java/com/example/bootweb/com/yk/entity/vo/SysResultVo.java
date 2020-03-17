@@ -11,6 +11,19 @@ public class SysResultVo implements Serializable {
      * 状态码对应的消息
      */
     private String message = "OK";
+
+    public Integer getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    /**
+     * 分页
+     */
+    private Integer pageCount = 0;
     /**
      * 要呈现到客户端的数据
      */
@@ -23,6 +36,11 @@ public class SysResultVo implements Serializable {
     }
 
     public SysResultVo(Object data) {
+        this.data = data;
+    }
+
+    public SysResultVo(Object data, Integer pageCount) {
+        this.pageCount = pageCount;
         this.data = data;
     }
 
@@ -74,5 +92,11 @@ public class SysResultVo implements Serializable {
         result.setState(0);
         result.setMessage(msg);
         return result;
+    }
+    /**
+     * 用于分页返回
+     */
+    public static SysResultVo pageOk(Object data, Integer pageCount){
+        return new SysResultVo(data, pageCount);
     }
 }

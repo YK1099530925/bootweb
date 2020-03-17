@@ -44,6 +44,11 @@ public class HomeController {
         int pageIndex = jsonObject.getIntValue("pageIndex");
         int pageSize = jsonObject.getIntValue("pageSize");
         List<Article> articles = articleService.selectAllArticleByPage(pageIndex, pageSize);
-        return SysResultVo.ok(articles);
+        // 查询数据库公共的文章条数
+        int pubCountAll = articleService.selectPubCount();
+        int pubCount = (int) Math.ceil(pubCountAll/(double) pageSize);
+        return SysResultVo.pageOk(articles, pubCount);
+    }
+    public static void main(String args[]){
     }
 }

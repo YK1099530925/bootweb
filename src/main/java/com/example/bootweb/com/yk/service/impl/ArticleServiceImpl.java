@@ -22,4 +22,17 @@ public class ArticleServiceImpl implements ArticleService {
         example.setPageSize(pageSize);
         return articleMapper.selectByExample(example);
     }
+
+    /**
+     * 如果这样查询，会把所有数据都先查出来，然后返回条数，
+     * 所以可以优化，新增一个查询方法在xml中，查询条数，这样就只返回一个总数
+     * @return
+     */
+    @Override
+    public int selectPubCount() {
+        ArticleExample example = new ArticleExample();
+        ArticleExample.Criteria criteria = example.createCriteria();
+        criteria.andPubPrivEqualTo(0);
+        return articleMapper.selectByExample(example).size();
+    }
 }

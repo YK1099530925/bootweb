@@ -11,7 +11,7 @@
 	background-color: #E5E5E5;
 }
 .text-height{
-	height: 1900px;
+	height: 1780px;
 	border: black solid 1px;
 }
 .center{
@@ -19,6 +19,10 @@
 	margin-top: 100px; /*离导航远一点，可以在中间添加说明之类的*/
 	margin-left: 2%;
 	width: 96%;
+}
+.page-center{
+	margin-left: 25%;
+	margin-right: 25%;
 }
 .left-right{
 	margin: 4%;

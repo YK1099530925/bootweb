@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ArticleService {
     List<Article> selectAllArticleByPage(int pageIndex, int pageSize);
+
+    int selectPubCount();
 }
