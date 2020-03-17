@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bootweb.com.yk.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.example.bootweb.com.yk.entity.Article">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="article_uuid" jdbcType="VARCHAR" property="articleUuid" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="original_author" jdbcType="VARCHAR" property="originalAuthor" />
+    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="aritcle_sign" jdbcType="VARCHAR" property="aritcleSign" />
+    <result column="article_content" jdbcType="VARCHAR" property="articleContent" />
+    <result column="article_tags" jdbcType="VARCHAR" property="articleTags" />
+    <result column="article_type" jdbcType="VARCHAR" property="articleType" />
+    <result column="article_categories" jdbcType="VARCHAR" property="articleCategories" />
+    <result column="pub_priv" jdbcType="INTEGER" property="pubPriv" />
+    <result column="publish_date" jdbcType="TIMESTAMP" property="publishDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="article_url" jdbcType="VARCHAR" property="articleUrl" />
+    <result column="article_tabloid" jdbcType="VARCHAR" property="articleTabloid" />
+    <result column="likes" jdbcType="INTEGER" property="likes" />
+    <result column="last_article_uuid" jdbcType="VARCHAR" property="lastArticleUuid" />
+    <result column="next_article_uuid" jdbcType="VARCHAR" property="nextArticleUuid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, article_uuid, author, original_author, article_title, aritcle_sign, article_content, 
+    article_tags, article_type, article_categories, pub_priv, publish_date, update_date, 
+    article_url, article_tabloid, likes, last_article_uuid, next_article_uuid
+  </sql>
+  <select id="selectByExample" parameterType="com.example.bootweb.com.yk.entity.ArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="pageIndex>=0 and pageSize>0">
+      limit #{pageIndex,jdbcType=INTEGER},
+      #{pageSize,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.bootweb.com.yk.entity.ArticleExample">
+    delete from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.bootweb.com.yk.entity.Article">
+    insert into article (id, article_uuid, author, 
+      original_author, article_title, aritcle_sign, 
+      article_content, article_tags, article_type, 
+      article_categories, pub_priv, publish_date, 
+      update_date, article_url, article_tabloid, 
+      likes, last_article_uuid, next_article_uuid
+      )
+    values (#{id,jdbcType=INTEGER}, #{articleUuid,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{originalAuthor,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{aritcleSign,jdbcType=VARCHAR}, 
+      #{articleContent,jdbcType=VARCHAR}, #{articleTags,jdbcType=VARCHAR}, #{articleType,jdbcType=VARCHAR}, 
+      #{articleCategories,jdbcType=VARCHAR}, #{pubPriv,jdbcType=INTEGER}, #{publishDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{articleUrl,jdbcType=VARCHAR}, #{articleTabloid,jdbcType=VARCHAR}, 
+      #{likes,jdbcType=INTEGER}, #{lastArticleUuid,jdbcType=VARCHAR}, #{nextArticleUuid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bootweb.com.yk.entity.Article">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="articleUuid != null">
+        article_uuid,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="originalAuthor != null">
+        original_author,
+      </if>
+      <if test="articleTitle != null">
+        article_title,
+      </if>
+      <if test="aritcleSign != null">
+        aritcle_sign,
+      </if>
+      <if test="articleContent != null">
+        article_content,
+      </if>
+      <if test="articleTags != null">
+        article_tags,
+      </if>
+      <if test="articleType != null">
+        article_type,
+      </if>
+      <if test="articleCategories != null">
+        article_categories,
+      </if>
+      <if test="pubPriv != null">
+        pub_priv,
+      </if>
+      <if test="publishDate != null">
+        publish_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="articleUrl != null">
+        article_url,
+      </if>
+      <if test="articleTabloid != null">
+        article_tabloid,
+      </if>
+      <if test="likes != null">
+        likes,
+      </if>
+      <if test="lastArticleUuid != null">
+        last_article_uuid,
+      </if>
+      <if test="nextArticleUuid != null">
+        next_article_uuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="articleUuid != null">
+        #{articleUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="originalAuthor != null">
+        #{originalAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null">
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="aritcleSign != null">
+        #{aritcleSign,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null">
+        #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTags != null">
+        #{articleTags,jdbcType=VARCHAR},
+      </if>
+      <if test="articleType != null">
+        #{articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCategories != null">
+        #{articleCategories,jdbcType=VARCHAR},
+      </if>
+      <if test="pubPriv != null">
+        #{pubPriv,jdbcType=INTEGER},
+      </if>
+      <if test="publishDate != null">
+        #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleUrl != null">
+        #{articleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTabloid != null">
+        #{articleTabloid,jdbcType=VARCHAR},
+      </if>
+      <if test="likes != null">
+        #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="lastArticleUuid != null">
+        #{lastArticleUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextArticleUuid != null">
+        #{nextArticleUuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.bootweb.com.yk.entity.ArticleExample" resultType="java.lang.Long">
+    select count(*) from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update article
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleUuid != null">
+        article_uuid = #{record.articleUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null">
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalAuthor != null">
+        original_author = #{record.originalAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleTitle != null">
+        article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aritcleSign != null">
+        aritcle_sign = #{record.aritcleSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleContent != null">
+        article_content = #{record.articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleTags != null">
+        article_tags = #{record.articleTags,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleType != null">
+        article_type = #{record.articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleCategories != null">
+        article_categories = #{record.articleCategories,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pubPriv != null">
+        pub_priv = #{record.pubPriv,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishDate != null">
+        publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.articleUrl != null">
+        article_url = #{record.articleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleTabloid != null">
+        article_tabloid = #{record.articleTabloid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.likes != null">
+        likes = #{record.likes,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastArticleUuid != null">
+        last_article_uuid = #{record.lastArticleUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextArticleUuid != null">
+        next_article_uuid = #{record.nextArticleUuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update article
+    set id = #{record.id,jdbcType=INTEGER},
+      article_uuid = #{record.articleUuid,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      original_author = #{record.originalAuthor,jdbcType=VARCHAR},
+      article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      aritcle_sign = #{record.aritcleSign,jdbcType=VARCHAR},
+      article_content = #{record.articleContent,jdbcType=VARCHAR},
+      article_tags = #{record.articleTags,jdbcType=VARCHAR},
+      article_type = #{record.articleType,jdbcType=VARCHAR},
+      article_categories = #{record.articleCategories,jdbcType=VARCHAR},
+      pub_priv = #{record.pubPriv,jdbcType=INTEGER},
+      publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      article_url = #{record.articleUrl,jdbcType=VARCHAR},
+      article_tabloid = #{record.articleTabloid,jdbcType=VARCHAR},
+      likes = #{record.likes,jdbcType=INTEGER},
+      last_article_uuid = #{record.lastArticleUuid,jdbcType=VARCHAR},
+      next_article_uuid = #{record.nextArticleUuid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bootweb.com.yk.entity.Article">
+    update article
+    <set>
+      <if test="articleUuid != null">
+        article_uuid = #{articleUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="originalAuthor != null">
+        original_author = #{originalAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null">
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="aritcleSign != null">
+        aritcle_sign = #{aritcleSign,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null">
+        article_content = #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTags != null">
+        article_tags = #{articleTags,jdbcType=VARCHAR},
+      </if>
+      <if test="articleType != null">
+        article_type = #{articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCategories != null">
+        article_categories = #{articleCategories,jdbcType=VARCHAR},
+      </if>
+      <if test="pubPriv != null">
+        pub_priv = #{pubPriv,jdbcType=INTEGER},
+      </if>
+      <if test="publishDate != null">
+        publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleUrl != null">
+        article_url = #{articleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTabloid != null">
+        article_tabloid = #{articleTabloid,jdbcType=VARCHAR},
+      </if>
+      <if test="likes != null">
+        likes = #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="lastArticleUuid != null">
+        last_article_uuid = #{lastArticleUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextArticleUuid != null">
+        next_article_uuid = #{nextArticleUuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bootweb.com.yk.entity.Article">
+    update article
+    set article_uuid = #{articleUuid,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      original_author = #{originalAuthor,jdbcType=VARCHAR},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      aritcle_sign = #{aritcleSign,jdbcType=VARCHAR},
+      article_content = #{articleContent,jdbcType=VARCHAR},
+      article_tags = #{articleTags,jdbcType=VARCHAR},
+      article_type = #{articleType,jdbcType=VARCHAR},
+      article_categories = #{articleCategories,jdbcType=VARCHAR},
+      pub_priv = #{pubPriv,jdbcType=INTEGER},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      article_url = #{articleUrl,jdbcType=VARCHAR},
+      article_tabloid = #{articleTabloid,jdbcType=VARCHAR},
+      likes = #{likes,jdbcType=INTEGER},
+      last_article_uuid = #{lastArticleUuid,jdbcType=VARCHAR},
+      next_article_uuid = #{nextArticleUuid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

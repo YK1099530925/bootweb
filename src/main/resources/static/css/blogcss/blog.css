@@ -1,0 +1,85 @@
+.border-bk{
+	border: #737373 solid 1px;
+}
+.border-color{
+	border: #FCF8E3 solid 1px;
+	background-color: #F5F5F5;
+}
+
+.body-high{
+	height: 2500px;
+	background-color: #E5E5E5;
+}
+.text-height{
+	height: 1900px;
+	border: black solid 1px;
+}
+.center{
+	position: absolute; 
+	margin-top: 100px; /*离导航远一点，可以在中间添加说明之类的*/
+	margin-left: 2%;
+	width: 96%;
+}
+.left-right{
+	margin: 4%;
+	height: 400px;
+}
+.center-text{
+	margin: 2%;
+	height: 280px;
+}
+.center-text-pagination{
+	margin: 3%;
+	height: 80px;
+}
+.yuanjiao{
+	border-top-right-radius: 25px; 
+	border-top-left-radius: 25px; 
+	border-bottom-right-radius:25px;
+	border-bottom-left-radius:25px;
+}
+/*标题样式*/
+.article-title{
+	margin-left: 1%;
+	margin-top: 1%;
+	font-size: 24px;
+	font-weight: 500;
+}
+/*分类样式*/
+.articleType{
+	border-radius: 5px;
+}
+.am-badge-success{
+	background-color: #5eb95e;
+}
+.am-badge{
+	display: inline-block;
+	min-width: 10px;
+	padding: .25em .625em;
+	font-size: 1.2rem;
+	font-weight:700;
+	color:#fff;
+	line-height:1;
+	vertical-align:baseline;
+	white-space:nowrap;
+	text-align:center;
+}
+/*正文内容样式*/
+.article-entry{
+	font-size: 16px;
+    padding: 8px 6px;
+    line-height: 2em;
+    color: #565a5f;
+    /*让文字只显示3行，后面的省略*/
+    display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	white-space: normal !important;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+/*首页中正文的a标签都使用一种颜色*/
+.center a{
+	color: #63676d;
+}
