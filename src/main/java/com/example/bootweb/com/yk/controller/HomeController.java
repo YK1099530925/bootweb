@@ -7,7 +7,6 @@ import com.example.bootweb.com.yk.entity.vo.SysResultVo;
 import com.example.bootweb.com.yk.service.ArticleService;
 import com.example.bootweb.com.yk.service.AuthorService;
 import com.example.bootweb.com.yk.service.CommentRecordService;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
